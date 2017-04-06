@@ -1,0 +1,22 @@
+{
+  "name": "aiva-runtime-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "@types/es6-shim": "^0.31.32",
+    "es6-shim": "^0.35.3",
+    "lodash": "^4.17.4",
+    "preprocessor-loader": "^1.0.5",
+    "rxjs": "^5.3.0",
+    "ts-loader": "^2.0.3",
+    "tsc": "^1.20150623.0",
+    "typescript": "^2.2.2",
+    "webpack": "^2.3.3"
+  }
+}
