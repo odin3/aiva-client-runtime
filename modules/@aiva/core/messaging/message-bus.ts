@@ -9,6 +9,8 @@ export class MessageBus {
   private _messages: Map<string, Message<any>> = new Map<string, Message<any>>();
 
   public pushMessage(message: Message<any>) {
+    this._messages.set(message.id, message);
+
     let event = document.createEvent('MessageEvent');
     let origin = `${window.location.protocol}//${window.location.host}`;
     let json = message.toString();
@@ -27,5 +29,9 @@ export class MessageBus {
     } else {
       Log.debug(MessageBus.TAG, `Response from: ${message.action}@${message.destination} (${success ? 'success' : 'failed'})`);
     }
+  }
+
+  public removeMessage(message) {
+    this._messages.delete(message.id);
   }
 }

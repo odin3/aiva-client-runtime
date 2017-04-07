@@ -10,6 +10,7 @@ import { Response } from './response';
  */
 export class Message<T> {
   private _guid: GUID = new GUID();
+  private _disposed: boolean = false;
 
   /**
    * Create a new message
@@ -32,9 +33,13 @@ export class Message<T> {
     return this._args;
   }
 
+  public get id(): string {
+    return this._guid.toString();
+  }
+
   public toString(): string {
     let msg: IMessage<T> = {
-      GUID: this._guid.toString(),
+      GUID: this.id,
       Action: this._action,
       Destination: this._destination,
       TimeStamp: Math.floor(Date.now() / 1000),
@@ -45,6 +50,10 @@ export class Message<T> {
   }
 
   public send(): Observable<Response> {
+    if (this._disposed) {
+      throw new ReferenceError('Disposed event can`t be sent');
+    }
+
     return Observable.create((observer: Observer<Response>) => {
       this.onMessageResponse = (response: Response) => {
         if (response.success) {
@@ -57,6 +66,16 @@ export class Message<T> {
       this._bus.pushMessage(this);
     })
 
+  }
+
+  public dispose() {
+    this._bus.removeMessage(this);
+    this._disposed = true;
+    this._guid = null;
+    this._action = null;
+    this._destination = null;
+    this._args = null;
+    this._bus = null;
   }
   
 }
