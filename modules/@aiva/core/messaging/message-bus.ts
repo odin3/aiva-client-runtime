@@ -1,4 +1,6 @@
 import { Map } from 'es6-shim';
+import { isUndefined } from 'lodash';
+
 import { Message } from './message';
 
 export class MessageBus {
@@ -11,5 +13,13 @@ export class MessageBus {
 
     event.initMessageEvent(message.destination, true, true, json, origin, '1234', window);
     document.dispatchEvent(event);
+  }
+
+  public __pushResponse__(guid: string, success: boolean, response: any) {
+    let message: Message<any> = this._messages.get(guid);
+    
+    if (isUndefined(message)) {
+      console.warn()
+    }
   }
 }

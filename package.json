@@ -12,6 +12,7 @@
     "@types/es6-shim": "^0.31.32",
     "es6-shim": "^0.35.3",
     "lodash": "^4.17.4",
+    "moment": "^2.18.1",
     "preprocessor-loader": "^1.0.5",
     "rxjs": "^5.3.0",
     "ts-loader": "^2.0.3",
