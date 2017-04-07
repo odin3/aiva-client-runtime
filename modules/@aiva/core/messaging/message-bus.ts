@@ -34,4 +34,8 @@ export class MessageBus {
   public removeMessage(message) {
     this._messages.delete(message.id);
   }
+
+  public createMessage(action: string, destination: string, args: any): Message<any> {
+    return new Message<any>(this, action, destination, args);
+  }
 }

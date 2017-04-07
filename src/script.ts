@@ -5,3 +5,12 @@
 //
 
 'use strict';
+
+import { Application, Bootstrap, Message } from '../modules/@aiva/core';
+
+@Bootstrap()
+export class TestApp extends Application {
+  protected onInit() {
+    alert('init');
+  }
+}
