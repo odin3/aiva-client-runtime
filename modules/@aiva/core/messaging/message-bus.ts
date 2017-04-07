@@ -2,14 +2,18 @@ import { Map } from 'es6-shim';
 import { isUndefined } from 'lodash';
 
 import { Message } from './message';
+import { Log } from '../log';
 
 export class MessageBus {
+  private static readonly TAG: string = 'MessageBus';
   private _messages: Map<string, Message<any>> = new Map<string, Message<any>>();
 
   public pushMessage(message: Message<any>) {
     let event = document.createEvent('MessageEvent');
     let origin = `${window.location.protocol}//${window.location.host}`;
     let json = message.toString();
+
+    Log.debug(MessageBus.TAG, `Send message: ${message.action}@${message.destination}`);
 
     event.initMessageEvent(message.destination, true, true, json, origin, '1234', window);
     document.dispatchEvent(event);
@@ -19,7 +23,9 @@ export class MessageBus {
     let message: Message<any> = this._messages.get(guid);
     
     if (isUndefined(message)) {
-      console.warn()
+      Log.error(MessageBus.TAG, `Receive response from ${message.action}@${message.destination} for unknown message ID (${guid})`);
+    } else {
+      Log.debug(MessageBus.TAG, `Response from: ${message.action}@${message.destination} (${success ? 'success' : 'failed'})`);
     }
   }
 }

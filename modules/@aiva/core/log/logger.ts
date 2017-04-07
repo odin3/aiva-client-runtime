@@ -27,6 +27,10 @@ export abstract class Logger {
     this.write(LogLevel.DEBUG, tag, message, content);
   }
 
+  public setLevel(newLevel: number) {
+    this._logLevel = newLevel;
+  }
+
   private write(level: number, tag: string, message: string, content: any[] = []) {
     if ((this._logLevel === LogLevel.ALL) || (level <= this._logLevel)) {
       this.printMessage(level, tag, message, content);
