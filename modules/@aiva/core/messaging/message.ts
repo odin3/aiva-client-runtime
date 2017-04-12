@@ -4,6 +4,7 @@ import { GUID } from '../guid';
 import { IMessage } from './imessage';
 import { MessageBus } from './message-bus';
 import { Response } from './response';
+import { Log } from '../log';
 
 /**
  * Message class represents interface to share data between WebView and runtime
@@ -55,16 +56,20 @@ export class Message<T> {
     }
 
     return Observable.create((observer: Observer<Response>) => {
+
+      Log.info('Message', 'Create message');
+
       this.onMessageResponse = (response: Response) => {
         if (response.success) {
           observer.next(response);
+          observer.complete();
         } else {
           observer.error(response);
         }
       };
 
       this._bus.pushMessage(this);
-    })
+    });
 
   }
 

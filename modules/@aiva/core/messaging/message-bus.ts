@@ -23,7 +23,7 @@ export class MessageBus {
 
   public __pushResponse__(guid: string, success: boolean, response: any) {
     let message: Message<any> = this._messages.get(guid);
-    
+    alert(arguments);
     if (isUndefined(message)) {
       Log.error(MessageBus.TAG, `Receive response from ${message.action}@${message.destination} for unknown message ID (${guid})`);
     } else {
