@@ -2,18 +2,19 @@ import { isNil } from 'lodash';
 import { MessageBus } from './messaging';
 
 export abstract class Application {
-  protected _bus: MessageBus = null;
+  
+  protected _bus: MessageBus;
+
+  public get bus(): MessageBus {
+    return this._bus;
+  }
+
+  public constructor() {
+    this._bus = new MessageBus();
+  }
 
   public init() {
     this.onInit();
-  }
-
-  public get bus(): MessageBus {
-    if (isNil(this._bus)) {
-      this._bus = new MessageBus();
-    }
-
-    return this._bus;
   }
 
   public dispose() {

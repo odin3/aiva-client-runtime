@@ -9,7 +9,7 @@ export function OnClick(selector: string) {
 
     document.addEventListener('DOMContentLoaded', () => {
       document.querySelector(selector).addEventListener('click', (event: MouseEvent) => {
-        target[key](event);
+        target[key].call(target, event);
       }, false);
     });
 

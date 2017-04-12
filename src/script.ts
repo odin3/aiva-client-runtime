@@ -6,7 +6,7 @@
 
 'use strict';
 
-import { Application, Bootstrap, Message, Element, OnClick, Response, Log, LogLevel } from '../modules/@aiva/core';
+import { Application, Bootstrap, Message, Element, OnClick, Response, Log, LogLevel, MessageBus } from '../modules/@aiva/core';
 
 @Bootstrap()
 export class TestApp extends Application {
@@ -16,22 +16,27 @@ export class TestApp extends Application {
 
   public constructor() {
     super();
-    Log.setLevel(LogLevel.ALL);
+
+    document.querySelector('#btn').addEventListener('click', () => {
+      this.onBtnClick();
+    });
   }
 
   protected onInit() {
+    Log.setLevel(LogLevel.ALL);
     Log.debug(this.getClassName(), 'App initialized');
   }
 
-  @OnClick('#btn')
   public onBtnClick() {
     Log.debug(this.getClassName(), 'Send test message');
+
     this.bus.createMessage('hello', 'Aiva.Modules.ClientRuntime', null)
-            .send()
-            .subscribe((r: Response)=> {
-              console.log(r);
-            }, (e: Response) => {
-              console.error(e);
-            });
+          .send()
+          .subscribe((r: Response)=> {
+            Log.info(this.getClassName(), 'Received result', r);
+          }, (e: Response) => {
+            Log.error(this.getClassName(), 'Bad response: ', e);
+            console.error(e);
+          });
   }
 }
