@@ -39,7 +39,7 @@ export abstract class Logger {
 
   public static format(level: number, tag: string, message: string) {
     let date = moment().format(this.DATE_FORMAT);
-    return `${date}: ${logLevels[level]}/${tag} ${message}`;
+    return `${date}: ${logLevels[level]}/${tag}: ${message}`;
   }
 
   protected printMessage(level: number, tag: string, message: string, content: any[]) {

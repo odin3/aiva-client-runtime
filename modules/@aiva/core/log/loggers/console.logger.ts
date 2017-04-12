@@ -11,16 +11,16 @@ export class ConsoleLogger extends Logger {
 
     switch (level) {
       case LogLevel.ERROR:
-        console.error.call(console, args);
+        console.error.apply(console, args);
         break;
       case LogLevel.WARN:
-        console.info.call(console, args);
+        console.info.apply(console, args);
         break;
       case LogLevel.INFO:
-        console.info.call(console, args);
+        console.info.apply(console, args);
         break;
       default:
-        console.log.call(console, args);
+        console.log.apply(console, args);
         break;
     }
   }

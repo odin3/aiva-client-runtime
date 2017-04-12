@@ -5,7 +5,7 @@ module.exports = {
         app: './src/script.ts'
     },
     output: {
-        filename: './dist/script.js'
+        filename: './dist/app.js'
     },
     resolve: {
         extensions: ['.ts', '.js']
