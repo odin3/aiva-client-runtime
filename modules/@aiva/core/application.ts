@@ -1,17 +1,23 @@
 import { isNil } from 'lodash';
 import { MessageBus } from './messaging';
 
-export abstract class Application {
+export class Application {
   
-  protected _bus: MessageBus;
+  protected _bus: MessageBus = null;
 
   public get bus(): MessageBus {
     return this._bus;
   }
 
-  public constructor() {
-    this._bus = new MessageBus();
+  public set bus(bus: MessageBus) {
+    if (this._bus !== null) {
+      throw new ReferenceError('MessageBus already assigned');
+    }
+
+    this._bus = bus;
   }
+
+  public constructor() {}
 
   public init() {
     this.onInit();

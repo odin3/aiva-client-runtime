@@ -7,6 +7,9 @@
 'use strict';
 
 import { Application, Bootstrap, Message, Element, OnClick, Response, Log, LogLevel, MessageBus } from '../modules/@aiva/core';
+import { FileSystem } from '../modules/@aiva/filesystem'; 
+
+import 'reflect-metadata';
 
 @Bootstrap()
 export class TestApp extends Application {
@@ -14,7 +17,7 @@ export class TestApp extends Application {
   @Element('#btn') btn: HTMLButtonElement;
   private readonly TAG: string = 'App';
 
-  public constructor() {
+  public constructor(private fs: FileSystem) {
     super();
 
     document.querySelector('#btn').addEventListener('click', () => {
