@@ -1,7 +1,7 @@
-export class Response {
+export class Response<T> {
   constructor(
     public messageId: string,
     public success: boolean,
-    public data: any
+    public data: T
   ) {}
 }

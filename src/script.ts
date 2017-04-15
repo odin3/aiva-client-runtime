@@ -7,7 +7,7 @@
 'use strict';
 
 import { Application, Bootstrap, Message, Element, OnClick, Response, Log, LogLevel, MessageBus } from '../modules/@aiva/core';
-import { FileSystem } from '../modules/@aiva/filesystem'; 
+import { FileSystem } from '../modules/@aiva/storage'; 
 
 import 'reflect-metadata';
 
@@ -17,7 +17,7 @@ export class TestApp extends Application {
   @Element('#btn') btn: HTMLButtonElement;
   private readonly TAG: string = 'App';
 
-  public constructor(private fs: FileSystem) {
+  public constructor() {
     super();
 
     document.querySelector('#btn').addEventListener('click', () => {
@@ -35,9 +35,9 @@ export class TestApp extends Application {
 
     this.bus.createMessage('hello', 'Aiva.Modules.ClientRuntime', null)
           .send()
-          .subscribe((r: Response)=> {
+          .subscribe((r: Response<string>)=> {
             Log.info(this.getClassName(), 'Received result', r);
-          }, (e: Response) => {
+          }, (e: Response<any>) => {
             Log.error(this.getClassName(), 'Bad response: ', e);
             console.error(e);
           });

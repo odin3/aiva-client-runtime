@@ -50,16 +50,16 @@ export class Message<T> {
     return JSON.stringify(msg);
   }
 
-  public send(): Observable<Response> {
+  public send(): Observable<Response<any>> {
     if (this._disposed) {
       throw new ReferenceError('Disposed event can`t be sent');
     }
 
-    return Observable.create((observer: Observer<Response>) => {
+    return Observable.create((observer: Observer<Response<any>>) => {
 
       Log.info('Message', 'Create message');
 
-      this.onMessageResponse = (response: Response) => {
+      this.onMessageResponse = (response: Response<any>) => {
         if (response.success) {
           observer.next(response);
           observer.complete();

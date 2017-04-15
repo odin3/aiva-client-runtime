@@ -26,7 +26,7 @@ export class MessageBus {
     }
   }
 
-  public __pushResponse__(guid: string, success: boolean, response: any) {
+  private __pushResponse__(guid: string, success: boolean, response: any) {
     let message: Message<any> = this._messages.get(guid);
     Log.debug(MessageBus.TAG, `Receive incoming message #${guid}: ${success ? 'success' : 'failed'})`);
 
