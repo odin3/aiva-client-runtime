@@ -1,0 +1,1 @@
+export const WINDOW_APP_PROP = '__app__';

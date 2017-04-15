@@ -1,30 +1,42 @@
-import { isArray } from 'lodash';
+import { isArray, isObject, isBoolean } from 'lodash';
 
+import { WINDOW_APP_PROP } from './const';
+import { IBootArgs } from './boot-args';
 import { Application } from './application';
 import { MessageBus } from './messaging';
 
-export function Bootstrap() {
-  return (target: typeof Application) => {
-    // Get dependency list
-    let metadata: any[] = Reflect.getMetadata('design:paramtypes', target);
+export function Bootstrap(args: IBootArgs = null) {
+  let useDI: boolean = isObject(args) && isBoolean(args.useDependencyInjection) ? args.useDependencyInjection : false;
 
+  return (target: any) => {
+
+    let app: Application = null;
+    
     // Create message bus
     let bus = new MessageBus();
 
-    let dependencies = [];
+    if (useDI) {
+      // Get dependency list
+      let metadata: any[] = Reflect.getMetadata('design:paramtypes', target);
 
-    // Initialize all dependencies
-    if (isArray(metadata)) {
-      dependencies = metadata.map((i) => {
-        return new i(bus);
-      });
+      let dependencies = [];
+
+      // Initialize all dependencies
+      if (isArray(metadata)) {
+        dependencies = metadata.map((i) => {
+          return new i(bus);
+        });
+      }
+
+      // Create app instance with resolved dependencies
+      app = new (Function.prototype.bind.apply(target, dependencies));
+    } else {
+      app = new target();
     }
 
-    // Create app instance with resolved dependencies
-    let app: Application = new (Function.prototype.bind.apply(target, dependencies));
     app.bus = bus;
 
-    window['__app__'] = app;
+    window[WINDOW_APP_PROP] = app;
 
     return target;
   };

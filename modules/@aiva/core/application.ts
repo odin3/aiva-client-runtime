@@ -1,5 +1,6 @@
 import { isNil } from 'lodash';
 import { MessageBus } from './messaging';
+import { WINDOW_APP_PROP } from './const';
 
 export class Application {
   
@@ -34,5 +35,9 @@ export class Application {
 
   protected getClassName(): string {
     return this.constructor['name'];
+  }
+
+  public static getDefaultApplication(): Application {
+    return window[WINDOW_APP_PROP];
   }
 } 
