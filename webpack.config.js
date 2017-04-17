@@ -2,13 +2,13 @@ var path = require('path');
 
 module.exports = {
     entry: {
-        app: './src/script.ts'
+        app: './src/script.tsx'
     },
     output: {
         filename: './dist/app.js'
     },
     resolve: {
-        extensions: ['.ts', '.js']
+        extensions: ['.ts', '.tsx', '.js']
     },
     module: {
         loaders: [{

@@ -28,9 +28,24 @@ export class Application {
     this.onDestroy();
   }
 
+/**
+ * On application initialized event handler
+ */
   protected onInit(): void {}
+
+/**
+ * On application suspend event handler
+ */
   protected onPause(): void {}
+
+/**
+ * On application restore event handler
+ */
   protected onRestore(): void {}
+  
+  /**
+   * On application exit event handler
+   */
   protected onDestroy(): void {}
 
   protected getClassName(): string {

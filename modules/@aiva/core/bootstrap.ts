@@ -1,4 +1,5 @@
 import { isArray, isObject, isBoolean } from 'lodash';
+import 'reflect-metadata';
 
 import { WINDOW_APP_PROP } from './const';
 import { IBootArgs } from './boot-args';

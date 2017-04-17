@@ -5,6 +5,7 @@ import { Injectable } from '../core';
 
 class FileSystem extends Injectable {
   private readonly MODULE_NAME: string   = 'Aiva.Modules.CoreFileSystem';
+  
   public constructor() {
     super();
   }

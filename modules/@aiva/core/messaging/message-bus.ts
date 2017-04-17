@@ -22,7 +22,7 @@ export class MessageBus {
       event.initMessageEvent(message.destination, true, true, json, origin, '1234', window, null);
       document.dispatchEvent(event);
     } catch (ex) {
-      Log.error(MessageBus.TAG, `Failed to send message: ${ex.getMessage()}`);
+      Log.error(MessageBus.TAG, `Failed to send message: ${ex.toString()}`);
     }
   }
 
