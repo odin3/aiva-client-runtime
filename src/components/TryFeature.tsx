@@ -27,36 +27,33 @@ export class TryFeature extends React.Component<ITryFeatureProps, ITryFeatureSta
 
   runDemo() {
     this.props.callback().subscribe(
-      () => this.displayResult,
-      () => () => this.displayResult
+      (data) => this.displayResult(data),
+      (data) => () => this.displayResult(data)
     );
   }
 
-  displayResult(...data) {
-    console.warn(arguments);
-    this.setState({ result: JSON.stringify(data) })
+  displayResult(data) {
+    this.setState({ result: JSON.stringify(data) });
   }
 
   render() {
     let result = null;
-
+    
     if (this.state.result !== null) {
-      result = <CardText expandable={true}>
-          <b>Result:</b>
-          <p><code>{this.state.result}</code></p>
-        </CardText>;
+      result = <CardText>
+        <b>Result:</b>
+        <p><code>{this.state.result}</code></p>
+      </CardText>;
     }
 
     return <div style={styles.section}>
       <Card>
         <CardHeader title={this.props.title}
-          actAsExpander={true}
-          showExpandableButton={true}
           subtitle={this.props.description} />
-        <CardActions>
-          <FlatButton label="Try" onClick={() => this.runDemo()} />
-        </CardActions>
         {result}
+        <CardActions>
+          <FlatButton label="Run Example" onClick={() => this.runDemo()} />
+        </CardActions>
       </Card>
     </div>;
   }
