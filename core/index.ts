@@ -1,3 +1,4 @@
+export * from './environment';
 export * from './application';
 export * from './injectable';
 export * from './messaging';

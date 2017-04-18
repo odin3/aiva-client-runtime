@@ -9,7 +9,6 @@
   "author": "Denis Sedchenko <ascii@live.ru>",
   "license": "ISC",
   "dependencies": {
-    "@types/es6-shim": "^0.31.32",
     "es6-shim": "^0.35.3",
     "lodash": "^4.17.4",
     "moment": "^2.18.1",

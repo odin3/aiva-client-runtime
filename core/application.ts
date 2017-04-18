@@ -1,6 +1,7 @@
 import { isNil } from 'lodash';
 import { MessageBus } from './messaging';
 import { WINDOW_APP_PROP } from './const';
+import { IEnvironmentInfo } from './environment';
 
 export class Application {
   
@@ -20,8 +21,8 @@ export class Application {
 
   public constructor() {}
 
-  public init() {
-    this.onInit();
+  public init(environment: IEnvironmentInfo) {
+    this.onInit.apply(this, arguments);
   }
 
   public dispose() {
@@ -31,7 +32,7 @@ export class Application {
 /**
  * On application initialized event handler
  */
-  protected onInit(): void {}
+  protected onInit(environment: IEnvironmentInfo): void {}
 
 /**
  * On application suspend event handler
