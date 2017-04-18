@@ -24,6 +24,11 @@ export class StoragePage extends React.Component<undefined, undefined> {
         title="Get Directories" 
         description="Get list of sub-directories from path"
         callback={callbacks.storageGetDirectories} />
+
+      <TryFeature 
+        title="Get Files" 
+        description="Get list of files from path"
+        callback={callbacks.storageGetFiles} />
     </div>;
   }
 }
